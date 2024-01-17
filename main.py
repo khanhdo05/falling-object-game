@@ -9,3 +9,5 @@ pygame.init()
 WIDTH = 800
 HEIGHT = 600
 TITLE = "Falling Object Game"
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption(TITLE)
