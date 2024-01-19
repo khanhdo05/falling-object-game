@@ -21,7 +21,7 @@ player_color = (209, 27, 115)      # Hot Pink
 object_size = WIDTH // 15
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
-object_speed = 10
+object_speed = 30
 
 # Player's properties
 player_size = WIDTH // 15
@@ -41,7 +41,9 @@ while running:
     # Drawing
     screen.fill(background_color)
     pygame.draw.rect(screen, object_color, (object_x, object_y, object_size, object_size))
-    
+    pygame.draw.rect(screen, player_color, (player_x, player_y, player_size, player_size))
+
+
     # Renew screen
     pygame.display.flip()
 
