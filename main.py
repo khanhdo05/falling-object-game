@@ -102,15 +102,15 @@ game_over_color = (26, 29, 33) # Black
 screen.fill(game_over_color)
 game_over_text = font.render("GAME OVER! SCORE: " + str(score), True, (250, 207, 122))
 press_to_quit = font.render("press anywhere to quit", True, (255, 255, 255))
-screen.blit(game_over_text, (WIDTH // 2 - (WIDTH // 4.44), HEIGHT // 2))
-screen.blit(press_to_quit, (WIDTH // 2 - 150, HEIGHT // 2 + 50))
+screen.blit(game_over_text, (WIDTH // 2 - (WIDTH / 4.44), HEIGHT // 2 - 10))
+screen.blit(press_to_quit, (WIDTH // 2 - (WIDTH / 4.44), HEIGHT // 2 + 30))
 pygame.display.flip()
 
 # Wait a minute!
 waiting = True
 while waiting:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT or event.type == pygame.KEWDOWN:
+        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
             waiting = False
 
 # Quit game
