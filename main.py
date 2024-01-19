@@ -41,6 +41,7 @@ while running:
     # Drawing
     
     # Renew screen
+    screen.fill(background_color)
     pygame.display.flip()
 
     # Frames per sec
