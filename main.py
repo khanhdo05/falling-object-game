@@ -21,6 +21,12 @@ player_color = (209, 27, 115)      # Hot Pink
 object_size = 20
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
+object_speed = 10
+
+# Player's properties
+player_size = 20
+player_x = WIDTH // 2
+player_y = HEIGHT - player_size
 
 # Clock
 clock = pygame.time.Clock()
