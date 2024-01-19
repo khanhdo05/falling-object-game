@@ -68,14 +68,15 @@ while running:
     # Update object's position
     if is_paused == False:
         object_y += object_speed
-        if object_y >= HEIGHT - player_size - 166:
+        if object_y >= HEIGHT - player_size:
             running = False
     
     # Collision Check
     if player_y + 166 < object_y + object_size and object_x < player_x + player_size and player_x < object_x + object_size:
         score += 1
         object_y = 0
-        object_x = random.randint(0, WIDTH - object_size)      
+        object_x = random.randint(0, WIDTH - object_size)  
+        object_speed += 1
 
     # Boundaries Check
     if player_x < 0:
