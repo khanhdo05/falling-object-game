@@ -21,12 +21,14 @@ player_color = (209, 27, 115)      # Hot Pink
 background_image = pygame.image.load('graphics/background.png')
 
 # Falling object's properties
+object_img = 'graphics/object.png'
 object_size = WIDTH // 15
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
-object_speed = 20
+object_speed = 15
 
 # Player's properties
+player_img = 'graphics/player.png'
 player_size = WIDTH // 15
 player_x = WIDTH // 2           # middle
 player_y = HEIGHT - player_size - 166 # ground
@@ -87,7 +89,7 @@ while running:
     # Text
     if is_paused == False:
         text = regular_font.render("Score: " + str(score), True, (0, 0, 0))
-        screen.blit(text, (70, 70))
+        screen.blit(text, (70, 30))
     else:
         text_paused = regular_font.render("Paused. Press Space to Resume!", True, (0, 0, 0))
         screen.blit(text_paused, (WIDTH // 2 - (WIDTH // 3), HEIGHT // 2))
@@ -115,7 +117,7 @@ pygame.display.flip()
 waiting = True
 while waiting:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
+        if event.type == pygame.QUIT:
             waiting = False
 
 # Quit game
