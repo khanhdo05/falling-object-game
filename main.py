@@ -3,11 +3,12 @@
 # Libraries Initialization
 import pygame
 import random
+from sys import exit
 pygame.init()
 
 # Game Window
-WIDTH = 800
-HEIGHT = 600
+WIDTH = 800 * 2
+HEIGHT = 600 * 2
 TITLE = "Falling Object Game"
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
@@ -21,7 +22,7 @@ player_color = (209, 27, 115)      # Hot Pink
 object_size = WIDTH // 15
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
-object_speed = 10
+object_speed = 20
 
 # Player's properties
 player_size = WIDTH // 15
@@ -31,7 +32,7 @@ player_y = HEIGHT - player_size # ground
 # Other
 clock = pygame.time.Clock()
 score = 0
-font = pygame.font.Font(None, 50)
+font = pygame.font.Font(None, 100)
 
 # Main Game Loop
 
@@ -103,7 +104,7 @@ screen.fill(game_over_color)
 game_over_text = font.render("GAME OVER! SCORE: " + str(score), True, (250, 207, 122))
 press_to_quit = font.render("press anywhere to quit", True, (255, 255, 255))
 screen.blit(game_over_text, (WIDTH // 2 - (WIDTH / 4.44), HEIGHT // 2 - 10))
-screen.blit(press_to_quit, (WIDTH // 2 - (WIDTH / 4.44), HEIGHT // 2 + 30))
+screen.blit(press_to_quit, (WIDTH // 2 - (WIDTH / 4.44), HEIGHT // 2 + 50))
 pygame.display.flip()
 
 # Wait a minute!
@@ -115,3 +116,4 @@ while waiting:
 
 # Quit game
 pygame.quit()
+exit()
