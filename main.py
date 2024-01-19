@@ -47,8 +47,14 @@ while running:
     # Update object's position
     object_y += object_speed
     if object_y >= HEIGHT:
+        running = False
+
+    
+    # Collision Check
+    if player_y < object_y + object_size and object_x < player_x + player_size and player_x < object_x + object_size:
+        score += 1
         object_y = 0
-        object_x = random.randint(0, WIDTH - object_size)
+        object_x = random.randint(0, WIDTH - object_size)      
 
     # Boundaries Check
     if player_x < 0:
