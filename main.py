@@ -40,10 +40,10 @@ is_paused = False # Pause Flag
 while running:
 
     for event in pygame.event.get():
-
+        # Quit action
         if event.type == pygame.QUIT:
             running = False
-        
+        # Game logic when pressed keys
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 if is_paused:
@@ -54,6 +54,8 @@ while running:
                 player_x -= player_size
             elif event.key == pygame.K_RIGHT:
                 player_x += player_size
+            elif event.key == pygame.K_ESCAPE:
+                running = False
     
     # Update object's position
     if is_paused == False:
