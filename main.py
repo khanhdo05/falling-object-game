@@ -28,8 +28,9 @@ player_size = WIDTH // 15
 player_x = WIDTH // 2           # middle
 player_y = HEIGHT - player_size # ground
 
-# Clock
+# Other
 clock = pygame.time.Clock()
+score = 0
 
 # Main Game Loop
 running = True
