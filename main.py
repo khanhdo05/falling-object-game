@@ -31,7 +31,7 @@ object_size = WIDTH // 13
 object_img = pygame.transform.scale(object_img, (object_size, object_size))
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
-object_speed = 20
+object_speed = 15
 
 # Player's properties
 player_img = pygame.image.load('graphics/player.png')
