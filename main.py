@@ -9,7 +9,7 @@ pygame.init()
 # Game Window
 WIDTH = 800 * 2
 HEIGHT = 600 * 2
-TITLE = "Falling Object Game"
+TITLE = "Catch Me If You Can"
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
@@ -32,7 +32,7 @@ player_y = HEIGHT - player_size # ground
 # Other
 clock = pygame.time.Clock()
 score = 0
-font = pygame.font.Font(None, 100)
+pixel_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 200)
 
 # Main Game Loop
 
@@ -82,10 +82,10 @@ while running:
 
     # Text
     if is_paused == False:
-        text = font.render("Score: " + str(score), True, (0, 0, 0))
+        text = pixel_font.render("Score: " + str(score), True, (0, 0, 0))
         screen.blit(text, (70, 70))
     else:
-        text_paused = font.render("Paused. Press Space to Resume!", True, (0, 0, 0))
+        text_paused = pixel_font.render("Paused. Press Space to Resume!", True, (0, 0, 0))
         screen.blit(text_paused, (WIDTH // 2 - (WIDTH // 3), HEIGHT // 2))
 
     # Drawing
@@ -99,12 +99,12 @@ while running:
     clock.tick(30)
 
 # Game Over Screen
-game_over_color = (26, 29, 33) # Black
+game_over_color = (15, 20, 31) # Dark Blue
 screen.fill(game_over_color)
-game_over_text = font.render("GAME OVER! SCORE: " + str(score), True, (250, 207, 122))
-press_to_quit = font.render("press anywhere to quit", True, (255, 255, 255))
-screen.blit(game_over_text, (WIDTH // 2 - (WIDTH / 4.44), HEIGHT // 2 - 10))
-screen.blit(press_to_quit, (WIDTH // 2 - (WIDTH / 4.44), HEIGHT // 2 + 50))
+game_over_text = pixel_font.render("WILL YOU BE MY", True, (252, 43, 113))
+press_to_quit = pixel_font.render("VALENTINE?", True, (252, 43, 113))
+screen.blit(game_over_text, (WIDTH // 2 - 550, HEIGHT // 2 - 200))
+screen.blit(press_to_quit, (WIDTH // 2 - 400, HEIGHT // 2))
 pygame.display.flip()
 
 # Wait a minute!
