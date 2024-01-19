@@ -25,8 +25,8 @@ object_speed = 10
 
 # Player's properties
 player_size = 20
-player_x = WIDTH // 2
-player_y = HEIGHT - player_size
+player_x = WIDTH // 2           # middle
+player_y = HEIGHT - player_size # ground
 
 # Clock
 clock = pygame.time.Clock()
