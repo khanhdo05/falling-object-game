@@ -18,13 +18,13 @@ object_color = (69, 143, 247)      # Blue
 player_color = (209, 27, 115)      # Hot Pink
 
 # Falling object's properties
-object_size = 20
+object_size = WIDTH // 15
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
 object_speed = 10
 
 # Player's properties
-player_size = 20
+player_size = WIDTH // 15
 player_x = WIDTH // 2           # middle
 player_y = HEIGHT - player_size # ground
 
@@ -39,9 +39,10 @@ while running:
             running = False
     
     # Drawing
+    screen.fill(background_color)
+    pygame.draw.rect(screen, object_color, (object_x, object_y, object_size, object_size))
     
     # Renew screen
-    screen.fill(background_color)
     pygame.display.flip()
 
     # Frames per sec
