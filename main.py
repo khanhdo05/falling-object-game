@@ -45,6 +45,9 @@ while running:
     
     # Update object's position
     object_y += object_speed
+    if object_y >= HEIGHT:
+        object_y = 0
+        object_x = random.randint(0, WIDTH - object_size)
 
     # Boundaries Check
     if player_x < 0:
