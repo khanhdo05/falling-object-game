@@ -20,17 +20,21 @@ player_color = (209, 27, 115)      # Hot Pink
 # Background Image
 background_image = pygame.image.load('graphics/background.png')
 
+# Heart Image
+heart_img = pygame.image.load('graphics/heart.png')
+heart_img = pygame.transform.scale(heart_img, (80, 80))
+
 # Falling object's properties
 object_img = pygame.image.load('graphics/object.png')
-object_size = WIDTH // 15
+object_size = WIDTH // 13
 object_img = pygame.transform.scale(object_img, (object_size, object_size))
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
-object_speed = 15
+object_speed = 20
 
 # Player's properties
 player_img = pygame.image.load('graphics/player.png')
-player_size = WIDTH // 15
+player_size = WIDTH // 13
 player_img = pygame.transform.scale(player_img, (player_size, player_size))
 player_x = WIDTH // 2           # middle
 player_y = HEIGHT - player_size - 166 # ground
@@ -105,6 +109,7 @@ while running:
         running = False
 
     # Drawing
+    screen.blit(heart_img, (70, 150))
     screen.blit(object_img, (object_x, object_y))
     screen.blit(player_img, (player_x, player_y))
 
