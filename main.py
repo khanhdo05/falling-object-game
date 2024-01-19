@@ -12,6 +12,16 @@ TITLE = "Falling Object Game"
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
+# Color palette
+background_color = (252, 227, 252) # Light Pink
+object_color = (69, 143, 247)      # Blue
+player_color = (209, 27, 115)      # Hot Pink
+
+# Falling object's properties
+object_size = 20
+object_x = random.randint(0, WIDTH - object_size)
+object_y = 0 # top of the screen
+
 # Clock
 clock = pygame.time.Clock()
 
