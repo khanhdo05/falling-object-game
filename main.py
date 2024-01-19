@@ -31,24 +31,35 @@ player_y = HEIGHT - player_size # ground
 # Other
 clock = pygame.time.Clock()
 score = 0
+font = pygame.font.Font(None, 36)
 
 # Main Game Loop
 running = True
+is_paused = False # Pause Flag
+
 while running:
+
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
             running = False
+        
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_SPACE:
+                if is_paused:
+                    is_paused = False
+                else:
+                    is_paused = True
+            elif event.key == pygame.K_LEFT:
                 player_x -= player_size
             elif event.key == pygame.K_RIGHT:
                 player_x += player_size
     
     # Update object's position
-    object_y += object_speed
-    if object_y >= HEIGHT:
-        running = False
-
+    if is_paused == False:
+        object_y += object_speed
+        if object_y >= HEIGHT:
+            running = False
     
     # Collision Check
     if player_y < object_y + object_size and object_x < player_x + player_size and player_x < object_x + object_size:
@@ -67,7 +78,6 @@ while running:
     screen.fill(background_color)
     pygame.draw.rect(screen, object_color, (object_x, object_y, object_size, object_size))
     pygame.draw.rect(screen, player_color, (player_x, player_y, player_size, player_size))
-
 
     # Renew screen
     pygame.display.flip()
