@@ -96,5 +96,10 @@ while running:
     # Frames per sec
     clock.tick(30)
 
+# Game Over Screen
+game_over_color = (26, 29, 33) # Black
+game_over_text = font.render("GAME OVER. SCORE: " + str(score), True, (245, 240, 230))
+screen.blit(game_over_text, (WIDTH // 2 - 100, HEIGHT // 2))
+
 # Exit game
 pygame.quit()
