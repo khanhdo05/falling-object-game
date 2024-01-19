@@ -37,9 +37,21 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                player_x -= player_size
+            elif event.key == pygame.K_RIGHT:
+                player_x += player_size
     
     # Update object's position
     object_y += object_speed
+
+    # Boundaries Check
+    if player_x < 0:
+        player_x = 0
+    elif player_x + player_size > WIDTH - player_size:
+        player_x = WIDTH - player_size
+
     
     # Drawing
     screen.fill(background_color)
