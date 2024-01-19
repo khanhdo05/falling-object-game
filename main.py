@@ -21,7 +21,7 @@ player_color = (209, 27, 115)      # Hot Pink
 object_size = WIDTH // 15
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
-object_speed = 30
+object_speed = 10
 
 # Player's properties
 player_size = WIDTH // 15
@@ -37,6 +37,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+    
+    # Update object's position
+    object_y += object_speed
     
     # Drawing
     screen.fill(background_color)
