@@ -14,28 +14,31 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
 # Color palette
-background_color = (252, 227, 252) # Light Pink
 object_color = (69, 143, 247)      # Blue
 player_color = (209, 27, 115)      # Hot Pink
 
+# Background Image
 background_image = pygame.image.load('graphics/background.png')
 
 # Falling object's properties
-object_img = 'graphics/object.png'
+object_img = pygame.image.load('graphics/object.png')
 object_size = WIDTH // 15
+object_img = pygame.transform.scale(object_img, (object_size, object_size))
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
 object_speed = 15
 
 # Player's properties
-player_img = 'graphics/player.png'
+player_img = pygame.image.load('graphics/player.png')
 player_size = WIDTH // 15
+player_img = pygame.transform.scale(player_img, (player_size, player_size))
 player_x = WIDTH // 2           # middle
 player_y = HEIGHT - player_size - 166 # ground
 
 # Other
 clock = pygame.time.Clock()
 score = 0
+heart = 3
 pixel_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 200)
 regular_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', 100)
 
@@ -71,7 +74,10 @@ while running:
     if is_paused == False:
         object_y += object_speed
         if object_y >= HEIGHT - player_size:
-            running = False
+            heart -= 1
+            object_y = 0
+            object_x = random.randint(0, WIDTH - object_size)  
+            object_speed += 1
     
     # Collision Check
     if player_y + 166 < object_y + object_size and object_x < player_x + player_size and player_x < object_x + object_size:
@@ -94,9 +100,13 @@ while running:
         text_paused = regular_font.render("Paused. Press Space to Resume!", True, (0, 0, 0))
         screen.blit(text_paused, (WIDTH // 2 - (WIDTH // 3), HEIGHT // 2))
 
+    # Lose!
+    if heart == 0:
+        running = False
+
     # Drawing
-    pygame.draw.rect(screen, object_color, (object_x, object_y, object_size, object_size))
-    pygame.draw.rect(screen, player_color, (player_x, player_y, player_size, player_size))
+    screen.blit(object_img, (object_x, object_y))
+    screen.blit(player_img, (player_x, player_y))
 
     # Renew screen
     pygame.display.flip()
