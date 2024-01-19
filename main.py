@@ -31,7 +31,7 @@ player_y = HEIGHT - player_size # ground
 # Other
 clock = pygame.time.Clock()
 score = 0
-font = pygame.font.Font(None, 36)
+font = pygame.font.Font(None, 50)
 
 # Main Game Loop
 running = True
@@ -57,6 +57,9 @@ while running:
             elif event.key == pygame.K_ESCAPE:
                 running = False
     
+    # Draws a new screen
+    screen.fill(background_color)
+
     # Update object's position
     if is_paused == False:
         object_y += object_speed
@@ -75,9 +78,15 @@ while running:
     elif player_x + player_size > WIDTH - player_size:
         player_x = WIDTH - player_size
 
-    
+    # Text
+    if is_paused == False:
+        text = font.render("Score: " + str(score), True, (0, 0, 0))
+        screen.blit(text, (70, 70))
+    else:
+        text_paused = font.render("Paused. Press Space to Resume!", True, (0, 0, 0))
+        screen.blit(text_paused, (WIDTH // 2 - (WIDTH // 3), HEIGHT // 2))
+
     # Drawing
-    screen.fill(background_color)
     pygame.draw.rect(screen, object_color, (object_x, object_y, object_size, object_size))
     pygame.draw.rect(screen, player_color, (player_x, player_y, player_size, player_size))
 
