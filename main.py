@@ -19,6 +19,7 @@ player_color = (209, 27, 115)      # Hot Pink
 
 # Background Image
 background_image = pygame.image.load('graphics/background.png')
+game_over_background = pygame.image.load('graphics/game_over_background.png')
 
 # Heart Image
 heart_img = pygame.image.load('graphics/heart.png')
@@ -98,8 +99,11 @@ while running:
 
     # Text
     if is_paused == False:
+        screen.blit(heart_img, (WIDTH - 200, 55))
         text = regular_font.render("Score: " + str(score), True, (0, 0, 0))
         screen.blit(text, (70, 30))
+        heart_count = regular_font.render(":"+ str(heart), True, (0, 0, 0))
+        screen.blit(heart_count, (WIDTH - 115, 38))
     else:
         text_paused = regular_font.render("Paused. Press Space to Resume!", True, (0, 0, 0))
         screen.blit(text_paused, (WIDTH // 2 - (WIDTH // 3), HEIGHT // 2))
@@ -109,7 +113,6 @@ while running:
         running = False
 
     # Drawing
-    screen.blit(heart_img, (70, 150))
     screen.blit(object_img, (object_x, object_y))
     screen.blit(player_img, (player_x, player_y))
 
@@ -120,10 +123,9 @@ while running:
     clock.tick(30)
 
 # Game Over Screen
-game_over_color = (15, 20, 31) # Dark Blue
-screen.fill(game_over_color)
 game_over_text = pixel_font.render("XXXXXXXXXXXXX", True, (252, 43, 113))
 press_to_quit = pixel_font.render("XXXXXXXXXX", True, (252, 43, 113))
+screen.blit(game_over_background, (0, 0))
 screen.blit(game_over_text, (WIDTH // 2 - 550, HEIGHT // 2 - 200))
 screen.blit(press_to_quit, (WIDTH // 2 - 400, HEIGHT // 2))
 pygame.display.flip()
