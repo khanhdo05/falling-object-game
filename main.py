@@ -156,6 +156,22 @@ while running:
     clock.tick(30)
 
 # Game Over Screen
+game_over = True
+while game_over:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        elif event.type == pygame.KEYDOWN:
+            game_over = False
+    screen.fill((0, 0, 0))
+    over_text = regular_font.render("GAME OVER", True, (255, 255, 255))
+    screen.blit(over_text, (WIDTH // 2, HEIGHT // 2))
+   
+    pygame.display.flip()
+    clock.tick(30)
+
+# Hehe Screen
 game_over_text = pixel_font.render("WILL YOU BE MY", True, (252, 43, 113))
 press_to_quit = pixel_font.render("VALENTINE?", True, (252, 43, 113))
 dear = pixel_small_font.render("TO:ALEC", True, (251, 194, 7))
