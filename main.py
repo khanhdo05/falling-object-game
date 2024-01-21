@@ -16,6 +16,7 @@ pygame.display.set_caption(TITLE)
 # Background Image
 background_image = pygame.image.load('graphics/background.png')
 game_over_background = pygame.image.load('graphics/game_over_background.png')
+game_over_screen = pygame.image.load('graphics/game_over_screen.png')
 
 # Heart Image
 heart_img = pygame.image.load('graphics/heart.png')
@@ -43,6 +44,7 @@ score = 0
 heart = 3
 
 # Font
+game_over_font = pygame.font.Font('font/Pixelify_Sans/static/PixelifySans-Bold.ttf', 200)
 pixel_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 220)
 pixel_small_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 170)
 pixel_smaller_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 90)
@@ -164,9 +166,9 @@ while game_over:
             exit()
         elif event.type == pygame.KEYDOWN:
             game_over = False
-    screen.fill((0, 0, 0))
-    over_text = regular_font.render("GAME OVER", True, (255, 255, 255))
-    screen.blit(over_text, (WIDTH // 2, HEIGHT // 2))
+    screen.blit(game_over_screen, (0, 0))
+    over_text = game_over_font.render("GAME OVER", True, (251, 194, 7))
+    screen.blit(over_text, (WIDTH // 2 - 500, HEIGHT // 2 - 200))
    
     pygame.display.flip()
     clock.tick(30)
@@ -184,6 +186,7 @@ screen.blit(dear, (WIDTH // 2 - 240, 130))
 screen.blit(happy, (WIDTH // 2 - 600, HEIGHT - 220))
 screen.blit(score_final, (350, 180))
 screen.blit(heart_big_img, (200, 160))
+screen.blit(player_img, (1200, 145))
 pygame.display.flip()
 
 # Wait a minute!
