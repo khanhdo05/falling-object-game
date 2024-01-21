@@ -63,7 +63,22 @@ while welcome:
    
     pygame.display.flip()
     clock.tick(30)
-        
+
+# Instruction Screen
+instruction = True
+while instruction:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        elif event.type == pygame.KEYDOWN:
+            instruction = False
+    screen.fill((0, 0, 0))
+    ins_text = regular_font.render("Got the rules?", True, (255, 255, 255))
+    screen.blit(ins_text, (WIDTH // 2, HEIGHT // 2))
+   
+    pygame.display.flip()
+    clock.tick(30)
             
 # Main Game Loop
 
