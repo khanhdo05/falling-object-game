@@ -13,10 +13,6 @@ TITLE = "Catch Me If You Can"
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
-# Color palette
-object_color = (69, 143, 247)      # Blue
-player_color = (209, 27, 115)      # Hot Pink
-
 # Background Image
 background_image = pygame.image.load('graphics/background.png')
 game_over_background = pygame.image.load('graphics/game_over_background.png')
@@ -45,11 +41,30 @@ player_y = HEIGHT - player_size - 166 # ground
 clock = pygame.time.Clock()
 score = 0
 heart = 3
+
+# Font
 pixel_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 220)
 pixel_small_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 170)
 pixel_smaller_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 90)
 regular_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', 100)
 
+# Welcome Screen
+welcome = True
+while welcome:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        elif event.type == pygame.KEYDOWN:
+            welcome = False
+    screen.fill((0, 0, 0))
+    welcome_text = regular_font.render("Press any key to start game.", True, (255, 255, 255))
+    screen.blit(welcome_text, (WIDTH // 2, HEIGHT // 2))
+   
+    pygame.display.flip()
+    clock.tick(30)
+        
+            
 # Main Game Loop
 
 running = True
@@ -130,14 +145,14 @@ game_over_text = pixel_font.render("WILL YOU BE MY", True, (252, 43, 113))
 press_to_quit = pixel_font.render("VALENTINE?", True, (252, 43, 113))
 dear = pixel_small_font.render("TO:ALEC", True, (251, 194, 7))
 happy = pixel_smaller_font.render("I KNOW, THIS IS PRETTY LIT, RIGHT?", True, (251, 194, 7))
-score_final = pixel_small_font.render("X" + str(score), True, (252, 43, 113))
+score_final = pixel_smaller_font.render("X" + str(score), True, (252, 43, 113))
 screen.blit(game_over_background, (0, 0))
 screen.blit(game_over_text, (WIDTH // 2 - 600, HEIGHT // 2 - 200))
 screen.blit(press_to_quit, (WIDTH // 2 - 420, HEIGHT // 2))
 screen.blit(dear, (WIDTH // 2 - 240, 130))
 screen.blit(happy, (WIDTH // 2 - 600, HEIGHT - 220))
-screen.blit(score_final, (180, 160))
-screen.blit(heart_big_img, (180, 140))
+screen.blit(score_final, (350, 180))
+screen.blit(heart_big_img, (200, 160))
 pygame.display.flip()
 
 # Wait a minute!
