@@ -38,6 +38,9 @@ player_img = pygame.transform.scale(player_img, (player_size, player_size))
 player_x = WIDTH // 2           # middle
 player_y = HEIGHT - player_size - 166 # ground
 
+# Music
+pygame.mixer.music.load('audio/background_music.mp3')
+lose_sound = pygame.mixer.Sound('audio/lose.mp3')
 # Other
 clock = pygame.time.Clock()
 score = 0
