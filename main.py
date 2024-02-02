@@ -177,9 +177,9 @@ while game_over:
     clock.tick(30)
 
 # Hehe Screen
-game_over_text = pixel_font.render("WILL YOU BE MY", True, (252, 43, 113))
-press_to_quit = pixel_font.render("VALENTINE?", True, (252, 43, 113))
-dear = pixel_small_font.render("TO:ALEC", True, (251, 194, 7))
+game_over_text = pixel_font.render("______________", True, (252, 43, 113))
+press_to_quit = pixel_font.render("_________?", True, (252, 43, 113))
+dear = pixel_small_font.render("TO:____", True, (251, 194, 7))
 happy = pixel_smaller_font.render("I KNOW, THIS IS PRETTY LIT, RIGHT?", True, (251, 194, 7))
 score_final = pixel_smaller_font.render("X" + str(score), True, (252, 43, 113))
 screen.blit(game_over_background, (0, 0))
