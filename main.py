@@ -25,12 +25,31 @@ heart_img = pygame.transform.scale(heart_img, (80, 80))
 heart_big_img = pygame.transform.scale(heart_img, (130, 130))
 
 # Falling object's properties
-object_img = pygame.image.load('graphics/object.png')
-object_size = WIDTH // 10
+## Main Object
+object_img = pygame.image.load('graphics/coin.png')
+object_size = WIDTH // 12
 object_img = pygame.transform.scale(object_img, (object_size, object_size))
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
 object_speed = 15
+## Foul Object
+foul1_img = pygame.image.load('graphics/strawberry.png')
+foul1_size = WIDTH // 12
+foul1_img = pygame.transform.scale(foul1_img, (foul1_size, foul1_size))
+foul1_speed = 10
+foul1_x = random.randint(0, WIDTH - foul1_size)
+foul1_y = 0
+foul1_falling = False
+foul1_score = -1  # Negative score for strawberry
+
+foul2_img = pygame.image.load('graphics/pineapple.png')
+foul2_size = WIDTH // 12
+foul2_img = pygame.transform.scale(foul2_img, (foul2_size, foul2_size))
+foul2_speed = 12
+foul2_x = random.randint(0, WIDTH - foul2_size)
+foul2_y = 0
+foul2_falling = False
+foul2_score = -2  # More negative score for pineapple
 
 # Player's properties
 player_img = pygame.image.load('graphics/player.png')
@@ -102,11 +121,11 @@ while running:
                     is_paused = False
                 else:
                     is_paused = True
-            elif event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT:
                 player_x -= player_size
-            elif event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT:
                 player_x += player_size
-            elif event.key == pygame.K_ESCAPE:
+            if event.key == pygame.K_ESCAPE:
                 running = False
     
     # Draws a new screen
@@ -142,8 +161,8 @@ while running:
         heart_count = regular_font.render(":"+ str(heart), True, (0, 0, 0))
         screen.blit(heart_count, (WIDTH - 115, 38))
     else:
-        text_paused = regular_font.render("Paused. Press Space to Resume!", True, (0, 0, 0))
-        screen.blit(text_paused, (WIDTH // 2 - (WIDTH // 3), HEIGHT // 2))
+        text_paused = regular_font.render("Paused. Press Space to Resume", True, (0, 0, 0))
+        screen.blit(text_paused, (WIDTH // 2 - (WIDTH // 2.2), HEIGHT // 2.5))
 
     # Lose!
     if heart == 0:
