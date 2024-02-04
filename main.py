@@ -14,6 +14,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
 # Background Image
+welcome_image = pygame.image.load('graphics/welcome.png')
 background_image = pygame.image.load('graphics/background.png')
 game_over_background = pygame.image.load('graphics/game_over_background.png')
 game_over_screen = pygame.image.load('graphics/game_over_screen.png')
@@ -62,9 +63,7 @@ while welcome:
             exit()
         elif event.type == pygame.KEYDOWN:
             welcome = False
-    screen.fill((0, 0, 0))
-    welcome_text = regular_font.render("Press any key to start game.", True, (255, 255, 255))
-    screen.blit(welcome_text, (WIDTH // 2, HEIGHT // 2))
+    screen.blit(welcome_image, (0, 0))
    
     pygame.display.flip()
     clock.tick(30)
