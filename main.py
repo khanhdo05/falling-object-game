@@ -26,6 +26,7 @@ heart_img = pygame.transform.scale(heart_img, (80, 80))
 heart_big_img = pygame.transform.scale(heart_img, (130, 130))
 
 # Falling object's properties
+
 ## Main Object
 object_img = pygame.image.load('graphics/coin.png')
 object_size = WIDTH // 12
@@ -33,6 +34,7 @@ object_img = pygame.transform.scale(object_img, (object_size, object_size))
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
 object_speed = 12
+
 ## Foul Object 1
 foul1_img = pygame.image.load('graphics/object.png')
 foul1_size = WIDTH // 12
@@ -42,6 +44,7 @@ foul1_x = random.randint(0, WIDTH - foul1_size)
 foul1_y = 0
 foul1_falling = False
 foul1_score = -1  # Negative score for strawberry
+
 ## Foul Object 2
 foul2_img = pygame.image.load('graphics/pineapple.png')
 foul2_size = WIDTH // 12
@@ -83,22 +86,25 @@ pixel_smaller_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 90)
 regular_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', 100)
 regular_small_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', 70)
 
-# States
-WELCOME_STATE = 0
-INSTRUCTION_STATE = 1
-PLAY_STATE = 2
-GAME_OVER_STATE = 3
-HEHE = 4
-
-# Initial state
-current_state = WELCOME_STATE
-
 # Load the music file
 background_music = pygame.mixer.music.load('audio/background_music.mp3')
 hehe_music = pygame.mixer.Sound('audio/hehe.mp3')
 game_over_sound = pygame.mixer.Sound('audio/lose.mp3')
 lose_p_sound = pygame.mixer.Sound('audio/lose_p.mp3')
 earn_sound = pygame.mixer.Sound('audio/earn.mp3')
+boost_sound = pygame.mixer.Sound('audio/boost.mp3')
+
+# Play the boost sound:
+def play_boost_sound():
+    boost_sound.play()
+
+# Play the earn sound
+def play_earn_sound():
+    earn_sound.play()
+
+#Play lose point sound
+def play_lose_sound():
+    lose_p_sound.play()
 
 # Play the lose sound when lose
 def play_go_sound():
@@ -110,6 +116,10 @@ def play_hehe_sound():
 
 background_music
 pygame.mixer.music.play(-1)  # Play in an infinite loop
+
+# Set the volume (0.0 to 1.0, where 0.0 is silent and 1.0 is full volume)
+volume_level = 0.3  # Adjust this value to set the desired volume level
+pygame.mixer.music.set_volume(volume_level)
 
 def reset_game():
     global score, heart, object_speed, player_speed, object_y, foul1_falling, foul1_y, foul2_falling, foul2_y, power_falling, power_y
@@ -127,6 +137,16 @@ def reset_game():
     power_falling = False
     power_y = 0
     power_x = random.randint(0, WIDTH - power_size)
+
+# States
+WELCOME_STATE = 0
+INSTRUCTION_STATE = 1
+PLAY_STATE = 2
+GAME_OVER_STATE = 3
+HEHE = 4
+
+# Initial state
+current_state = WELCOME_STATE
 
 # Welcome Screen
 while current_state == WELCOME_STATE:
@@ -229,25 +249,29 @@ while current_state == PLAY_STATE:
     # Collision Check
     if player_y + 166 < object_y + object_size and object_x < player_x + player_size and player_x < object_x + object_size:
         score += 1
+        play_earn_sound()
         object_y = 0
         object_x = random.randint(0, WIDTH - object_size)  
         object_speed += 1
 
-    # Collision Check for Strawberry
+    # Collision Check for Foul1
     if player_y + 166 < foul1_y + foul1_size and foul1_x < player_x + player_size and player_x < foul1_x + foul1_size:
         score += foul1_score
+        play_lose_sound()
         foul1_falling = False
         foul1_y = 0
 
-    # Collision Check for Pineapple
+    # Collision Check for Foul2
     if player_y + 166 < foul2_y + foul2_size and foul2_x < player_x + player_size and player_x < foul2_x + foul2_size:
         score += foul2_score
+        play_lose_sound()
         foul2_falling = False
         foul2_y = 0
 
     # Collision Check for Power
     if player_y + 166 < power_y + power_size and power_x < player_x + player_size and player_x < power_x + power_size:
         player_speed += 5
+        play_boost_sound()
         power_falling = False
         power_y = 0
 
