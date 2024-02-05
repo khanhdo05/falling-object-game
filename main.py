@@ -32,12 +32,12 @@ object_size = WIDTH // 12
 object_img = pygame.transform.scale(object_img, (object_size, object_size))
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
-object_speed = 15
+object_speed = 12
 ## Foul Object 1
 foul1_img = pygame.image.load('graphics/object.png')
 foul1_size = WIDTH // 12
 foul1_img = pygame.transform.scale(foul1_img, (foul1_size, foul1_size))
-foul1_speed = 10
+foul1_speed = 8
 foul1_x = random.randint(0, WIDTH - foul1_size)
 foul1_y = 0
 foul1_falling = False
@@ -46,7 +46,7 @@ foul1_score = -1  # Negative score for strawberry
 foul2_img = pygame.image.load('graphics/pineapple.png')
 foul2_size = WIDTH // 12
 foul2_img = pygame.transform.scale(foul2_img, (foul2_size, foul2_size))
-foul2_speed = 12
+foul2_speed = 5
 foul2_x = random.randint(0, WIDTH - foul2_size)
 foul2_y = 0
 foul2_falling = False
@@ -56,7 +56,7 @@ foul2_score = -2  # More negative score for pineapple
 power_img = pygame.image.load('graphics/power.png')
 power_size = WIDTH // 15
 power_img = pygame.transform.scale(power_img, (power_size, power_size))
-power_speed = 12
+power_speed = 15
 power_x = random.randint(0, WIDTH - power_size)
 power_y = 0
 power_falling = False
@@ -190,8 +190,6 @@ while current_state == PLAY_STATE:
     if (score >= 20) and random.randint(0, 8000) == 0 and not foul1_falling:
         foul1_falling = True
         foul1_x = random.randint(0, WIDTH - foul1_size)
-    else: 
-        foul_falling = False
 
     # Update foul1's position
     if is_paused == False:
