@@ -7,23 +7,28 @@ from sys import exit
 pygame.init()
 
 # Game Window
-WIDTH = 800 * 2
-HEIGHT = 600 * 2
+WIDTH = 1600
+HEIGHT = WIDTH * 0.75
 TITLE = "Catch Me If You Can"
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
 # Background Image
 welcome_img = pygame.image.load('graphics/welcome.png')
+welcome_img = pygame.transform.scale(welcome_img, (WIDTH, HEIGHT))
 instruction_img = pygame.image.load('graphics/instruction.png')
+instruction_img = pygame.transform.scale(instruction_img, (WIDTH, HEIGHT))
 background_img = pygame.image.load('graphics/background.png')
+background_img = pygame.transform.scale(background_img, (WIDTH, HEIGHT))
 game_over_background = pygame.image.load('graphics/game_over_background.png')
+game_over_background = pygame.transform.scale(game_over_background, (WIDTH, HEIGHT))
 game_over_screen = pygame.image.load('graphics/game_over_screen.png')
+game_over_screen = pygame.transform.scale(game_over_screen, (WIDTH, HEIGHT))
 
 # Heart Image
 heart_img = pygame.image.load('graphics/heart.png')
-heart_img = pygame.transform.scale(heart_img, (80, 80))
-heart_big_img = pygame.transform.scale(heart_img, (130, 130))
+heart_img = pygame.transform.scale(heart_img, (WIDTH*0.05, WIDTH*0.05))
+heart_big_img = pygame.transform.scale(heart_img, (WIDTH*0.08125, WIDTH*0.08125))
 
 # Falling object's properties
 
@@ -33,13 +38,13 @@ object_size = WIDTH // 12
 object_img = pygame.transform.scale(object_img, (object_size, object_size))
 object_x = random.randint(0, WIDTH - object_size)
 object_y = 0 # top of the screen
-object_speed = 12
+object_speed = WIDTH * (3 / 400)
 
 ## Foul Object 1
 foul1_img = pygame.image.load('graphics/object.png')
 foul1_size = WIDTH // 12
 foul1_img = pygame.transform.scale(foul1_img, (foul1_size, foul1_size))
-foul1_speed = 8
+foul1_speed = WIDTH // 200
 foul1_x = random.randint(0, WIDTH - foul1_size)
 foul1_y = 0
 foul1_falling = False
@@ -49,7 +54,7 @@ foul1_score = -1  # Negative score for strawberry
 foul2_img = pygame.image.load('graphics/pineapple.png')
 foul2_size = WIDTH // 12
 foul2_img = pygame.transform.scale(foul2_img, (foul2_size, foul2_size))
-foul2_speed = 5
+foul2_speed = WIDTH // 320
 foul2_x = random.randint(0, WIDTH - foul2_size)
 foul2_y = 0
 foul2_falling = False
@@ -59,7 +64,7 @@ foul2_score = -2  # More negative score for pineapple
 power_img = pygame.image.load('graphics/power.png')
 power_size = WIDTH // 15
 power_img = pygame.transform.scale(power_img, (power_size, power_size))
-power_speed = 15
+power_speed = WIDTH * (3 / 320)
 power_x = random.randint(0, WIDTH - power_size)
 power_y = 0
 power_falling = False
@@ -70,7 +75,7 @@ player_img = pygame.image.load('graphics/player.png')
 player_size = WIDTH // 10
 player_img = pygame.transform.scale(player_img, (player_size, player_size))
 player_x = WIDTH // 2                 # middle
-player_y = HEIGHT - player_size - 166 # ground
+player_y = HEIGHT - player_size - (WIDTH * (83/800)) # ground
 player_speed = player_size
 
 # Other
@@ -79,12 +84,12 @@ score = 0
 heart = 3
 
 # Font
-game_over_font = pygame.font.Font('font/Pixelify_Sans/static/PixelifySans-Bold.ttf', 200)
-pixel_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 220)
-pixel_small_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 170)
-pixel_smaller_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 90)
-regular_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', 100)
-regular_small_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', 70)
+game_over_font = pygame.font.Font('font/Pixelify_Sans/static/PixelifySans-Bold.ttf', int(WIDTH / 8))
+pixel_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', int(WIDTH * (11 / 80)))
+pixel_small_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', int(WIDTH * (17 / 160)))
+pixel_smaller_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', int(WIDTH * (9 / 160)))
+regular_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', int(WIDTH / 16))
+regular_small_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', int(WIDTH * (7 / 160)))
 
 # Load the music file
 background_music = pygame.mixer.music.load('audio/background_music.mp3')
@@ -125,7 +130,7 @@ def reset_game():
     global score, heart, object_speed, player_speed, object_y, foul1_falling, foul1_y, foul2_falling, foul2_y, power_falling, power_y
     score = 0
     heart = 3
-    object_speed = 15
+    object_speed = WIDTH * (3/ 320)
     player_speed = player_size
     object_y = 0
     foul1_falling = False
@@ -185,6 +190,9 @@ while current_state == PLAY_STATE:
             exit()
         # Game logic when pressed keys
         elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                exit()
             if event.key == pygame.K_SPACE:
                 if is_paused:
                     is_paused = False
@@ -205,7 +213,7 @@ while current_state == PLAY_STATE:
             heart -= 1
             object_y = 0
             object_x = random.randint(0, WIDTH - object_size)  
-            object_speed += 2
+            object_speed += WIDTH // 800
     
     # Randomly drop foul1
     if (score >= 20) and random.randint(0, 8000) == 0 and not foul1_falling:
@@ -247,7 +255,7 @@ while current_state == PLAY_STATE:
             power_x = random.randint(0, WIDTH - power_size)
     
     # Collision Check
-    if player_y + 166 < object_y + object_size and object_x < player_x + player_size and player_x < object_x + object_size:
+    if player_y + (WIDTH * (83 / 800)) < object_y + object_size and object_x < player_x + player_size and player_x < object_x + object_size:
         score += 1
         play_earn_sound()
         object_y = 0
@@ -255,22 +263,22 @@ while current_state == PLAY_STATE:
         object_speed += 1
 
     # Collision Check for Foul1
-    if player_y + 166 < foul1_y + foul1_size and foul1_x < player_x + player_size and player_x < foul1_x + foul1_size:
+    if player_y + (WIDTH * (83 / 800)) < foul1_y + foul1_size and foul1_x < player_x + player_size and player_x < foul1_x + foul1_size:
         score += foul1_score
         play_lose_sound()
         foul1_falling = False
         foul1_y = 0
 
     # Collision Check for Foul2
-    if player_y + 166 < foul2_y + foul2_size and foul2_x < player_x + player_size and player_x < foul2_x + foul2_size:
+    if player_y + (WIDTH * (83 / 800)) < foul2_y + foul2_size and foul2_x < player_x + player_size and player_x < foul2_x + foul2_size:
         score += foul2_score
         play_lose_sound()
         foul2_falling = False
         foul2_y = 0
 
     # Collision Check for Power
-    if player_y + 166 < power_y + power_size and power_x < player_x + player_size and player_x < power_x + power_size:
-        player_speed += 5
+    if player_y + (WIDTH * (83 / 800)) < power_y + power_size and power_x < player_x + player_size and player_x < power_x + power_size:
+        player_speed += WIDTH // 320
         play_boost_sound()
         power_falling = False
         power_y = 0
@@ -283,14 +291,14 @@ while current_state == PLAY_STATE:
 
     # Text
     if is_paused == False:
-        screen.blit(heart_img, (WIDTH - 200, 55))
+        screen.blit(heart_img, (WIDTH - (WIDTH / 8), WIDTH * (11 / 320)))
         text = regular_font.render("Score: " + str(score), True, (0, 0, 0))
         screen.blit(text, (70, 30))
         heart_count = regular_font.render(":"+ str(heart), True, (0, 0, 0))
-        screen.blit(heart_count, (WIDTH - 115, 38))
+        screen.blit(heart_count, (WIDTH - (WIDTH * (23 / 320)), WIDTH * (19 / 800)))
     else:
         text_paused = regular_font.render("Paused. Press Space to Resume", True, (0, 0, 0))
-        screen.blit(text_paused, (WIDTH // 2 - (WIDTH // 2.2), HEIGHT // 2.5))
+        screen.blit(text_paused, (WIDTH / 2 - (WIDTH / 2.2), HEIGHT / 2.5))
 
     # Lose!
     if heart == 0:
@@ -329,11 +337,11 @@ while current_state == GAME_OVER_STATE:
 
     screen.blit(game_over_screen, (0, 0))
     over_text = game_over_font.render("GAME OVER", True, (251, 194, 7))
-    screen.blit(over_text, (WIDTH // 2 - 500, HEIGHT // 2 - 200))
+    screen.blit(over_text, (WIDTH / 2 - (WIDTH * (5 / 16)), HEIGHT / 2 - (WIDTH / 8)))
     play_again_text = regular_small_font.render("Press SPACE to Play Again", True, (255, 255, 255))
-    screen.blit(play_again_text, (WIDTH // 2 - 400, HEIGHT // 2 + 100))
+    screen.blit(play_again_text, (WIDTH / 2 - (WIDTH / 4), HEIGHT / 2 + (WIDTH / 16)))
     next_text = regular_small_font.render("Press 'L' to Accept the L :)", True, (255, 255, 255))
-    screen.blit(next_text, (WIDTH // 2 - 400, HEIGHT // 2 + 200))
+    screen.blit(next_text, (WIDTH / 2 - (WIDTH / 4), HEIGHT / 2 + (WIDTH / 8)))
 
     pygame.display.flip()
     clock.tick(30)
@@ -344,6 +352,10 @@ while current_state == HEHE:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                exit()
 
     game_over_text = pixel_font.render("WILL YOU BE MY", True, (252, 43, 113))
     press_to_quit = pixel_font.render("VALENTINE?", True, (252, 43, 113))
@@ -351,11 +363,11 @@ while current_state == HEHE:
     happy = pixel_smaller_font.render("I KNOW, THIS IS PRETTY LIT, RIGHT?", True, (251, 194, 7))
     score_final = pixel_smaller_font.render("X" + str(score), True, (252, 43, 113))
     screen.blit(game_over_background, (0, 0))
-    screen.blit(game_over_text, (WIDTH // 2 - 600, HEIGHT // 2 - 200))
-    screen.blit(press_to_quit, (WIDTH // 2 - 420, HEIGHT // 2))
-    screen.blit(dear, (WIDTH // 2 - 240, 130))
-    screen.blit(happy, (WIDTH // 2 - 600, HEIGHT - 220))
-    screen.blit(score_final, (350, 180))
-    screen.blit(heart_big_img, (200, 160))
-    screen.blit(player_img, (1200, 145))
+    screen.blit(game_over_text, (WIDTH / 2 - (WIDTH * (3 / 8)), HEIGHT / 2 - (WIDTH / 8)))
+    screen.blit(press_to_quit, (WIDTH / 2 - (WIDTH * (21 / 80)), HEIGHT / 2))
+    screen.blit(dear, (WIDTH / 2 - (WIDTH * (3 / 20)), (WIDTH * (13 / 160))))
+    screen.blit(happy, (WIDTH / 2 - (WIDTH * (3 / 8)), HEIGHT - (WIDTH * (11 / 80))))
+    screen.blit(score_final, (WIDTH * (7 / 32), WIDTH * (9 / 80)))
+    screen.blit(heart_big_img, (WIDTH / 8, WIDTH / 10))
+    screen.blit(player_img, (WIDTH * 0.75, (WIDTH *  (29/320))))
     pygame.display.flip()
