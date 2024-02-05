@@ -190,6 +190,8 @@ while current_state == PLAY_STATE:
     if (score >= 20) and random.randint(0, 8000) == 0 and not foul1_falling:
         foul1_falling = True
         foul1_x = random.randint(0, WIDTH - foul1_size)
+    else: 
+        foul_falling = False
 
     # Update foul1's position
     if is_paused == False:
