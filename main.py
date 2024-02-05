@@ -83,7 +83,6 @@ pixel_smaller_font = pygame.font.Font('font/VT323/VT323-Regular.ttf', 90)
 regular_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', 100)
 regular_small_font = pygame.font.Font('font/Roboto/Roboto-Medium.ttf', 70)
 
-
 # States
 WELCOME_STATE = 0
 INSTRUCTION_STATE = 1
@@ -98,6 +97,8 @@ current_state = WELCOME_STATE
 background_music = pygame.mixer.music.load('audio/background_music.mp3')
 hehe_music = pygame.mixer.Sound('audio/hehe.mp3')
 game_over_sound = pygame.mixer.Sound('audio/lose.mp3')
+lose_p_sound = pygame.mixer.Sound('audio/lose_p.mp3')
+earn_sound = pygame.mixer.Sound('audio/earn.mp3')
 
 # Play the lose sound when lose
 def play_go_sound():
