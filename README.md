@@ -66,7 +66,7 @@ Before playing the game, ensure that you have Python and Pygame installed on you
 3. **Navigate to the Game Directory:**
 
     ```bash
-    cd path/falling-object-game
+    cd path/falling-object-game-main
     ```
 
 4. **Install Pygame:**
