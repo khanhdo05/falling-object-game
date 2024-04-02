@@ -357,10 +357,10 @@ while current_state == HEHE:
                 pygame.quit()
                 exit()
 
-    game_over_text = pixel_font.render("WILL YOU BE MY", True, (252, 43, 113))
-    press_to_quit = pixel_font.render("VALENTINE?", True, (252, 43, 113))
+    game_over_text = pixel_font.render("HAPPY BIRTHDAT", True, (252, 43, 113))
+    press_to_quit = pixel_font.render("YAYYYYYY?", True, (252, 43, 113))
     dear = pixel_small_font.render("TO:____", True, (251, 194, 7))
-    happy = pixel_smaller_font.render("I KNOW, THIS IS PRETTY LIT, RIGHT?", True, (251, 194, 7))
+    happy = pixel_smaller_font.render("Happy birthday lol lol lol lol True, (251, 194, 7))
     score_final = pixel_smaller_font.render("X" + str(score), True, (252, 43, 113))
     screen.blit(game_over_background, (0, 0))
     screen.blit(game_over_text, (WIDTH / 2 - (WIDTH * (3 / 8)), HEIGHT / 2 - (WIDTH / 8)))
